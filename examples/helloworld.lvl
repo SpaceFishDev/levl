@@ -1,0 +1,12 @@
+set 0 72
+set 1 101
+set 2 108
+set 3 108
+set 4 111
+set 5 32
+set 6 87
+set 7 111
+set 8 114
+set 9 108
+set 10 100
+puts 0 11
