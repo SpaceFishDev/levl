@@ -1,0 +1,11 @@
+set 0 0            
+set 1 1
+set 2 100
+push 0
+add 1
+store 0
+push 0
+print
+cmp 2 22 12
+push 2
+print
