@@ -14,7 +14,8 @@ enum instructions
 	PRINT = 0x9,
 	REG = 16512,
 	PUSH_UD = 0x10,
-	MOD = 0x11
+	MOD = 0x11,
+	PUTS = 0x12
 
 };
 
@@ -130,7 +131,6 @@ void set_ins_by_str(const char* str, thread* T)
 void execute_ins(thread* T)
 {
 	int ptr = T->program_ptr;
-	std::cout << T->ins[ptr] << " : " << ptr << "\n";
 	switch(T->ins[ptr]){
 		case STORE:
 		{
@@ -216,6 +216,23 @@ void execute_ins(thread* T)
 			int reg_temp = T->reg;
 			T->reg = T->mem[ptr_mod]%reg_temp;
 			T->program_ptr += 2;
+			break;
+		}
+		case PUTS:
+		{
+			int start = T->ins[ptr + 1];
+			int end = T->ins[ptr + 2];
+			char temp;
+			std::string str = "";
+			int i = start;
+			while(i != end + 1)
+			{
+				temp = (char)T->mem[i];
+				std::cout << temp;
+				++i;
+			}
+			std::cout << str << "\n";
+			T->program_ptr += 3;
 			break;
 		}
 	}

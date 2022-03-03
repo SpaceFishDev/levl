@@ -26,7 +26,9 @@ void InterpretLevl(const char* source, thread* T)
 	bool jmp = false;
 	int indx = 0;
 	int cmpind = 0;
+	int puts_ind = 0;
 	bool cmp = false;
+	bool puts = false;
 	int prptr = 0;
 	for(std::string symbol : symbols)
 	{
@@ -63,6 +65,10 @@ void InterpretLevl(const char* source, thread* T)
 		{
 			tokens.push_back(CMP);
 			cmp = true;
+		}else if(symbol == "puts")
+		{
+			tokens.push_back(PUTS);
+			puts = true;
 		}
 		else
 		{
@@ -89,6 +95,18 @@ void InterpretLevl(const char* source, thread* T)
 				{
 					cmp = false;
 					cmpind = 0;
+				}
+			}else if(puts)
+			{
+				if(puts_ind < 3)
+				{
+					int index = std::stoi(symbol);
+					tokens.push_back(index);
+					++puts_ind;
+				}else
+				{
+					puts = false;
+					puts_ind = 0;
 				}
 			}
 		}
